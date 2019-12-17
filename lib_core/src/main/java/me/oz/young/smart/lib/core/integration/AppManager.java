@@ -3,6 +3,7 @@ package me.oz.young.smart.lib.core.integration;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
+import android.util.Log;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  */
 public class AppManager {
 
+    private final String TAG = this.getClass().getSimpleName();
     /**
      * 不保证栈顶顺序一致
      */
@@ -50,9 +52,9 @@ public class AppManager {
             // 在新的栈中打开
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             mApplication.startActivity(intent);
-            return;
+        } else {
+            getTopActivity().startActivity(intent);
         }
-        getTopActivity().startActivity(intent);
     }
 
     private Activity getTopActivity() {
